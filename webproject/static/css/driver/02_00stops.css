@@ -1,0 +1,16 @@
+
+form .button{text-align: center; height:30px; width:100px;border: none; border-radius: 15%;color:white;font-weight: lighter;background-color: #36AE7C;}
+
+form .button_container{position: absolute;top:70%; text-align:center; width: 100%;}
+
+form .no_request{color: rgb(80, 74, 74);font-weight: lighter;}
+
+.page .roww{width: 110%;height:20%; background-color: grey;\position: relative;left:-5%;top:2%;color: rgb(29, 24, 24);}
+
+.page .roww .column{position: relative;left: 0.5%;top:1%;float: left;text-align: left;height: 70%;padding: 10px;font-size: x-small;background-color: aquamarine;}
+.page .roww .column.left{width:49.8%}
+.page .roww .column.middle{width:0%}
+.page .roww .column.right{width:32% ; color:#06477c;text-align: center;}
+
+
+.page .row .column .butn{border: none;background-color: antiquewhite;color:brown}

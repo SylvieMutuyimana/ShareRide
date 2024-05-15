@@ -1,0 +1,4 @@
+.details{width: 80%; height: 60%; position: relative; left: 10%; top: 20%;text-align: center;}
+.details button {text-align: center; height:45px; width:200px; border-radius: 10px;color:white;font-weight: lighter;
+       position: relative;top: 10%; bottom: 5px;background-color: #36AE7C;}
+img{width:100%}

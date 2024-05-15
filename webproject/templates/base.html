@@ -1,0 +1,15 @@
+<!--THE MAIN HOMEPAGE-->
+
+{% extends "page-template.html" %}
+{% block content %}
+    {% load static %}
+    <link rel="stylesheet" href = "{% static 'css/base.css'%}" >
+    <div class="details" style="background-color:blue">
+        <a href="{% url 'home' %}"><img src="{% static 'images/logo.jpg' %}"></a>
+        <a href="{% url 'passenger_login' %}"><button name="Passenger">PASSENGER</button></a>
+        <p></p>
+        <a href="{% url 'driver_login' %}"><button name="Driver"> DRIVER</button></a>
+    </div>
+
+{% endblock content %}
+
