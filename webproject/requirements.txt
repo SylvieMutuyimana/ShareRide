@@ -1,3 +1,5 @@
-- Django
-- virtual env (Optional)
-- Mysql
+Django
+psycopg2-binary
+dj-database-url
+whitenoise[brotli]
+gunicorn 
