@@ -2,4 +2,5 @@ Django
 psycopg2-binary
 dj-database-url
 whitenoise[brotli]
-gunicorn uvicorn
+gunicorn 
+uvicorn
