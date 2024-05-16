@@ -66,7 +66,7 @@ WSGI_APPLICATION = "webproject.wsgi.application"
 DATABASES = { 
     'default': dj_database_url.config(
         # Replace this value with your local database's connection string.
-        default='postgresql://postgres:postgres@localhost:5432/webproject',
+        default='postgresql://postgres:postgres@localhost:5432/ShareRide',
         conn_max_age=600
     )
 }
