@@ -14,7 +14,7 @@ SECRET_KEY = "django-insecure-xh0l=#&mhk&r^p47^c7sh6gw@&g&9gs-jucd!m^(nj#qe$v@8a
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['share-ride.onrender.com']
 
 INSTALLED_APPS = [
     # my apps
