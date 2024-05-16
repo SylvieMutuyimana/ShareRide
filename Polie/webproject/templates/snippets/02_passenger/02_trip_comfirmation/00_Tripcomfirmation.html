@@ -1,0 +1,93 @@
+{% extends "snippets/02_passenger/page-template.html" %}
+{% block content %}
+    <div style="margin-top: -410px !important;" class="form-2nd-cont" style="text-align: center;">
+        <div style="margin-bottom: 2%;" class="headrow">
+            <div style="bottom: 40%;"  class="col left_side">
+                <a style="margin-bottom: 40%;margin-right: 70%;" href="{% url 'available_drivers' %}" ><i style="color: blue !important;margin-top: -12% !important;" class="fa fa-arrow-left"></i></a>
+            </div>
+            <div style="margin-left: 17% !important;margin-top: -13%;color: black !important;" class="col right_side">
+                <a style="color: black !important;" href="{% url 'TripComfirmation'%}" >Trip Confirmation</a>
+            </div>
+        </div>
+        <form class="page-group" method="POST" action="">
+            {% csrf_token %}
+            <fieldset style="border: none;">       
+                <div class="row">
+                    {% if position == 'approved' %}
+                        <div style="background-color: rgb(107, 139, 247) !important;width: 80%;margin-left: 10%;" class="column right">
+                            Approved
+                        </div>  
+                        <div style="background-color: rgb(212, 220, 247) !important;width: 80%;margin-left: 10%;" class="column left">
+                            <!-- Request {{ details.1 }} -->
+                            Driver: {{ details.0 }} <br>
+                            Date: {{ details.2 }} <br>
+                            Time: {{ details.3 }} <br>
+                        </div> 
+                        <div class="button_container" style="text-align:left;margin-left: 10%;">
+                            <a href="tel:+250785048182" id="help-button">
+                                <i style="font-size:24px;margin-top: 210px !important;" class="fa">&#xf095;</i>
+                            </a>
+                        </div>
+                        <div class="button_container">
+                            <button style="margin-top: 8% !important; text-align:center ; height:40px; width:90%; border-radius: 10px;color:white;font-weight: bold;background-color: #4B39EF; border-color: whitesmoke !important; border:none " type="button" id="end" name="end" value="end" class="button">Arrived</button>
+                        </div>                        
+                    {% elif position == 'denied' %}
+                        <div style="background-color: rgb(212, 220, 247) !important;width: 80%;margin-left: 10%;"  class="column right">
+                            Denied
+                        </div>   
+                        <div style="background-color: rgb(107, 139, 247) !important;width: 80%;margin-left: 10%;" class="column left">
+                            <!-- Request {{ details.1 }} -->
+                            Driver: {{ details.0 }}
+                            Date: {{ details.2 }}
+                            Time: {{ details.3 }}
+                        </div>   
+                        <div class="button_container" style="text-align:left;margin-left: 15%;">
+                            <a href="tel:+250785048182" id="help-button">
+                                <i style="font-size:24px;margin-top: 275px !important;" class="fa">&#xf095;</i>
+                            </a>
+                        </div>  
+                    {% else %}
+                        <div style="background-color: rgb(107, 139, 247) !important;" class="column left">
+                            Awaiting Confirmation
+                        </div>
+                        <div style="background-color: rgb(212, 220, 247) !important;" class="column right">
+                            Request {{ details.1 }}
+                        </div> 
+                        <div class="button_container" style="text-align:left;margin-left: 15%;">
+                            <a href="tel:+250785048182" id="help-button">
+                                <i style="font-size:24px;margin-top: 275px !important;" class="fa">&#xf095;</i>
+                            </a>
+                        </div>       
+                    {% endif %}
+                </div>
+            </fieldset>
+        </form> 
+    </div>
+    <script>
+        const helpButton = document.getElementById('help-button');
+        const helpText = document.createElement('span');
+        helpText.textContent = 'Request Help';
+        helpText.style.cursor = 'pointer'; // Add cursor pointer to the text
+
+        helpButton.appendChild(helpText);
+
+        helpButton.addEventListener('mouseenter', () => {
+            helpText.style.opacity = '1';
+        });
+
+        helpButton.addEventListener('mouseleave', () => {
+            helpText.style.opacity = '0';
+        });
+
+        // Add click event listener to call the phone number
+        helpButton.addEventListener('click', () => {
+            window.location.href = 'tel:+250785048182';
+        });
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById("end").addEventListener("click", function() {
+                // Redirect to the rating page URL
+                window.location.href = "{% url 'rating_page' %}";
+            });
+        });
+    </script>
+{% endblock %}

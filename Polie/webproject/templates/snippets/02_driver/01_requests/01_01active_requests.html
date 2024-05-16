@@ -1,0 +1,55 @@
+{% extends "snippets/02_driver/01_requests/01_00request.html" %}
+{% block anothercontent %}
+    {% load static %}{% load mathfilters %}
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">    
+    <link rel="stylesheet" href = "{% static 'css/page_container.css'%}" >
+    <link rel="stylesheet" href = "{% static 'css/driver/01_01activerequests.css'%}" >
+
+    <form style="width: 250px !important;margin-left: -5.7% !important;" name="active_requests" method="get" id="active_requests" >
+        {%csrf_token%}
+        {% if n_pending_requests > 0 %}
+            {% for request in pending_dr_requests %}
+
+                <div style="border-color: white !important;background-color: white !important;" class="roww">   
+                    <div style="background-color: rgb(212, 220, 247);" class="column left">
+                        <i class="material-icons">&#xe7fd;</i>
+                        <!--{{pending_dr_requests.0.ride_id}}.-->
+                        {{pending_dr_requests.0.username}}
+                        
+                    </div>
+                    <div style="background-color: rgb(212, 220, 247);" class="column middle"> 
+                        <select name="id" style="display:none; visibility:hidden;">
+                            <option>{{pending_dr_requests.0.ride_id}}</option>
+                        </select>
+                        {{pending_dr_requests.0.current_area}}
+                        ({{pending_dr_requests.0.current_stop}})<br>
+                        <i class="material-icons">&#xeb3c;</i>
+                        <i class="material-icons">&#xe5db;</i><br>
+                        {{pending_dr_requests.0.destination_area}}
+                        ({{pending_dr_requests.0.destination_stop}})
+                    </div>
+                    <div style="background-color: rgb(212, 220, 247);" class="column right"> 
+                        {{pending_dr_requests.0.d_time}}
+                        <br>{{pending_dr_requests.0.d_date}}
+                        <button style="background-color:  rgb(107, 139, 247)!important;border: none !important ;border-radius: 10%;height: 30%;margin-top: 10% !important;width: 60px;" type="checkbox" id="comfirm" name="comfirm" value="comfirm_p">Comfirm</button>
+                        <button style="background-color:  rgb(107, 139, 247)!important;border: none !important;margin-top: 10% !important;border-radius: 10%;height: 30%;width: 60px;" type="checkbox" id="decline" name="decline" value="decline_p">Decline</button>
+                    </div>
+                </div>
+            {%endfor%}
+        {% else %}
+            <div style="color: rgb(29, 24, 24);">
+                <br>
+            There are currently no active requests to your ride
+            </div>
+        {%endif%} 
+        <br>
+        {% for message in messages %}
+            <p style="color: red;" id="messages">{{message}}</p>
+        {%endfor%}
+
+    </form>
+    
+
+{% endblock anothercontent %}
+

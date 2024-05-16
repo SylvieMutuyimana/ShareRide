@@ -1,0 +1,65 @@
+{% extends "snippets/02_driver/page-template.html" %}
+{% block content %}
+    {% load static %}{% load mathfilters %}
+    <link rel="stylesheet" href="{% static 'css/page_templates/dr_homepage.css' %}">
+    </style>
+    <h3 style="margin-top: -5% !important; color: black;">Rate Your Trip</h3>
+    <div style="background-color: whitesmoke !important;margin-top: 3% !important; margin-left: 6% !important;width: 230px;" class="form-2nd-cont">
+        <form name="trip_form" method="POST" id="trip_form" >
+            {%csrf_token%}
+            <fieldset style="color: rgb(87, 86, 86) !important; border: none !important; background-color: none !important;">
+            <div class="details-container" >
+                <div>
+                  <img style="margin-top: -10% !important;width: 130px !important; margin-left: 10% !important;" src="https://res.cloudinary.com/polievicia123/image/upload/v1711027201/share-ride-logo_of0jfa.svg" alt="Share Ride Logo">
+                  <h3>Thank you for choosing us</h3><br>
+                  <p style="margin-top: -15%;">You are rating your trip with {{ trip.driver }}.</p>
+                  <div style=" margin-left: 30%;" id="ratingStars">
+                    <span class="fa fa-star" data-rating="1"></span>
+                    <span class="fa fa-star" data-rating="2"></span>
+                    <span class="fa fa-star" data-rating="3"></span>
+                    <span class="fa fa-star" data-rating="4"></span>
+                    <span class="fa fa-star" data-rating="5"></span>
+                  </div>
+                  <textarea style="background-color: whitesmoke;width: 90% !important;margin-top: 10%;" rows="5" cols="50" placeholder="Write your feedback here..."></textarea>
+                  <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <div class="button_container">
+                      <button style="margin-top: 20% !important; text-align:center ; height:40px; width:90%; border-radius: 10px;color:white;font-weight: bold;background-color: #4B39EF; border-color: whitesmoke !important; border:none " type="button" id="end" name="end" value="end" class="button">Submit</button>
+                    </div>
+                  </form>
+                </div>
+                <br>                   
+            </div>
+            </fieldset>
+        </form>
+    </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+          const stars = document.querySelectorAll("#ratingStars .fa-star");
+
+          stars.forEach((star) => {
+            star.addEventListener("click", function() {
+              const rating = parseInt(this.getAttribute("data-rating"));
+              for (let i = 0; i < stars.length; i++) {
+                if (i < rating) {
+                  stars[i].classList.add("checked");
+                } else {
+                  stars[i].classList.remove("checked");
+                }
+              }
+            });
+          });
+
+          document.getElementById("end").addEventListener("click", function() {
+              // Redirect to the rating page URL
+              window.location.href = "{% url 'driver_homepage' %}";
+          });
+      });
+    </script>
+<style>
+    .fa-star.checked {
+      color: yellow;
+    }
+</style>
+{% endblock content %}

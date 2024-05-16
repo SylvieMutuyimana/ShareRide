@@ -1,0 +1,7 @@
+ .details{width: 80%; height: 60%; position: relative; left: 10%; top: 10%;text-align: center;margin-top:50px;}
+.details button {border-color: whitesmoke; text-align: center; height:45px; width:200px; border-radius: 10px;color:white;font-weight: lighter;
+       position: relative;top: 10%; bottom: 25px;background-color: #4B39EF;}
+img{width:80%;}
+.driver{border-color: whitesmoke !important; background-color: #39D2C0 !important;}
+.h1{color: #1c1f22;font-size: 20;}
+.h6{color: #57636C;font-size: 10;}

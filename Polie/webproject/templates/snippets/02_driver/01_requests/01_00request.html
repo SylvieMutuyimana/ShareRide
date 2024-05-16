@@ -1,0 +1,31 @@
+{% extends "snippets/02_driver/page-template.html" %}
+{% block content %}
+    {% load static %}{% load mathfilters %}
+    <link rel="stylesheet" href = "{% static 'css/driver/01_00requests.css'%}" >
+    <strong style="color: black;">REQUESTS</strong>
+    <div style="background-color: whitesmoke !important;" class="form-2nd-cont">
+      <div style="background-color: rgb(212, 220, 247);" class="toggle_box">
+        <div style="background-color: rgb(107, 139, 247) !important;" id="toggle_switch"></div>
+        
+        <button type="submit" class="toggle_btn" onclick="leftClick()">Active</button>
+        <button type="submit" class="toggle_btn" onclick="rightClick()">Approved</button>
+      </div>
+      {%block anothercontent %}
+
+
+      {% endblock anothercontent %}
+      <script>
+        var toggle_switch = document.getElementById('toggle_switch')
+        function leftClick() {
+          toggle_switch.style.left = '0%';
+          location.href="{% url 'passenger_active_requests' %}"
+        }
+        function rightClick() {
+          toggle_switch.style.left = '50%';
+          location.href="{% url 'passenger_approved_requests' %}"
+      }
+      </script>
+    </div>
+
+{% endblock content %}
+

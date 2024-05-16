@@ -1,0 +1,108 @@
+{% extends "snippets/02_passenger/page-template.html" %}
+{% block content %}
+    {% load static %}{% load mathfilters %}
+    <link rel="stylesheet" href = "{% static 'css/page_templates/dr_homepage.css'%}" >
+    <strong style="color: black !important;">TRIP DETAILS  </strong>
+    <div style="background-color: whitesmoke !important; height: 70% !important;margin-top: 5%;" class="form-2nd-cont">
+        <form name="trip_form" method="POST" id="trip_form" >
+            {%csrf_token%}
+            <fieldset style="color: rgb(87, 86, 86) !important; border: none !important; background-color: whitesmoke !important;">
+            <div class="details-container" >
+                <div class="page-group1">
+                    Current location
+                    <div class="location" >
+                        <select style="color: rgb(87, 86, 86) !important; background-color: rgb(212, 220, 247);border-radius: 5px;" name="area_curr" id="area_curr"><option value="" selected="selected"><em>Select area</em></option></select> <br> <br>
+                        <select style="color: rgb(87, 86, 86) !important;background-color: rgb(212, 220, 247);border-radius: 5px;" name="stop_curr" id="stop_curr"><option value="" selected="selected"><em>Select your origin</em></option></select>
+                    </div> 
+                </div>
+                <br><br> 
+                <div class="page-group1">
+                    Destination<br>
+                    <div class="location">
+                        <select style="color: rgb(87, 86, 86) !important;background-color: rgb(212, 220, 247);border-radius: 5px;" name="area_dest" id="area_dest"><option value="" selected="selected"><em>Select area</em></option></select>                         
+                        <br><br>
+                        <select style="color: rgb(87, 86, 86) !important;background-color: rgb(212, 220, 247);border-radius: 5px;" name="stop_dest" id="stop_dest"><option value="" selected="selected"><em>Select your stop</em></option></select>
+                    </div>  
+                </div>
+                <br><br>
+                <!-- {%for field in form %}
+                <div style="width: 85%;"  class="page-group2">
+                    {{field.label_tag}}<br>
+                    {{field}}
+                </div>  
+                {%endfor%} -->
+                <div class="page-group2">
+                    <label for="num_people">Number of People:</label><br>
+                    <input style="background-color: rgb(212, 220, 247);color: rgb(87, 86, 86);border: none;border-radius: 5px;height: 8%;margin-left: 6%;width: 90%;" type="number" name="number_of_people" value="0" placeholder="Number of people">
+                </div><br>
+                <div class="page-group2">
+                    <label for="d_date">Date:</label><br>
+                    <input style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;background-color: rgb(212, 220, 247);border: none;color: rgb(87, 86, 86);border-radius: 5px;height: 9%;margin-left: 6%;width: 50%;font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;" type="text" name="d_date" value="03/24/2024" placeholder="Month/Day/Year">
+                </div>
+                <div style="margin-top: -20%;margin-left: 60%;border-radius: 5px;" class="page-group2">
+                    <label for="time">Time:</label><br>
+                    <input style="color: rgb(87, 86, 86);background-color: rgb(212, 220, 247);border: none;border-radius: 5px;height: 9%;margin-left: 14%;width: 75%;font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;" type="text" name="d_time" value="10:30" placeholder="07:30">
+                </div>
+            </div>
+            <br><br><br>
+            {% for message in messages %}
+                <div style="position: absolute; z-index: 1; background-color:green; height: 200px; width: 90%; top: 10; left: 5%; ">
+                    <p style="color: red;" id="messages">{{message}}</p>
+                </div>
+            {%endfor%}
+            </fieldset>
+            <div class="button-container">
+                <button style="text-align:center ; height:40px; width:85%; border-radius: 10px;color:white;font-weight: bold;background-color: #4B39EF; border-color: whitesmoke !important; border:none;margin-top: 10%; " class="button">SUBMIT</button>                             
+            </div>
+        </form>
+    </div>
+    <script>
+        //Cascading dropdown list of 2
+        var current_location = {
+            "Kinanira": {"Kira": [],"petit-seminaire": [],"lumiere":[], 
+                       "kioske sangwe":[],"station-KCO":[]},
+            "Kanyosha": {"Kury'1": [],"Kury'2": [],"kury'3-kingstar":[], "kury'4":[],"kury'5-zone":[],
+                          "kury'8":[],"Kury'9":[]},
+            "Ville": {"Tourisme": [],"Mutuelle": [],"Park":[], 
+                       "BRB":[],"Cathedrale":[],"Musi y'igiti":[],"Le Parisien":[],"Palais des arts":[],
+                       "Cafe-Gourmand":[],"Avenue de l'amitie":[],"Avenue de la mission":[],"Boulevard de l'uprona":[],
+                       "Avenue de la mort":[],"Nociature":[],"INSS":[],"Place de l'independance":[],"Jardin Publique":[]}}
+        var destination = {
+            "Kinanira": {"Kira": [],"petit-seminaire": [],"lumiere":[], 
+                       "kioske sangwe":[],"station-KCO":[]},
+            "Kanyosha": {"Kury'1": [],"Kury'2": [],"kury'3-kingstar":[], "kury'4":[],"kury'5-zone":[],
+                          "kury'8":[],"Kury'9":[]},
+            "Ville": {"Tourisme": [],"Mutuelle": [],"Park":[], 
+                        "BRB":[],"Cathedrale":[],"Musi y'igiti":[],"Le Parisien":[],"Palais des arts":[],
+                        "Cafe-Gourmand":[],"Avenue de l'amitie":[],"Avenue de la mission":[],"Boulevard de l'uprona":[],
+                        "Avenue de la mort":[],"Nociature":[],"INSS":[],"Place de l'independance":[],"Jardin Publique":[]}}
+        window.onload = function curr() {
+            var area_curr_Sel = document.getElementById("area_curr");
+            var stop_curr_Sel = document.getElementById("stop_curr");
+            for (var x in current_location) {area_curr_Sel.options[area_curr_Sel.options.length] = new Option(x, x);}
+            area_curr_Sel.onchange = function curr() {
+                stop_curr_Sel.length = 1;
+                for (var y in current_location[this.value]) {
+                    stop_curr_Sel.options[stop_curr_Sel.options.length] = new Option(y, y);}
+            }
+    
+            var area_dest_Sel = document.getElementById("area_dest");
+            var stop_dest_Sel = document.getElementById("stop_dest");
+            for (var t in destination) {area_dest_Sel.options[area_dest_Sel.options.length] = new Option(t, t);}
+            area_dest_Sel.onchange = function dest() {
+                stop_dest_Sel.length = 1;
+                for (var z in destination[this.value]) {
+                    stop_dest_Sel.options[stop_dest_Sel.options.length] = new Option(z, z);}}}
+    
+    
+        var form_fields = document.getElementsByTagName('input')
+        form_fields['car_plate'].placeholder='Car plate ...';
+        form_fields['d_date'].placeholder='Month/Day/Year';
+        form_fields['time'].placeholder='07:30';
+        for(var field in form_fields){
+            form_fields[field].className == 'form-control'
+        }
+    </script>
+
+{% endblock content %}
+

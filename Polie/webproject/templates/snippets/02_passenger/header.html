@@ -1,0 +1,38 @@
+{% extends "snippets/00_page_templates/header.html" %}
+{% block content %}
+    {% load static %}
+    <div class="overlay-nav">
+        <div><a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a></div>
+            <div class="right-sid"><img alt="" class="img-icon" src="{% static 'images/passenger.png' %}" ></div>
+        </div>
+        <div class="overlay-menu-content">
+            <a href="{% url 'profile' %}">Profile</a>
+            <a href="{% url 'passenger_homepage' %}">TRIP</a>
+            <a href="{% url 'available_drivers' %}">AVAILABLE RIDES</a>
+            <a href="{% url 'TripComfirmation' %}">TRIP COMFIRMATION</a>
+            <a href="{% url 'settings' %}">SETTINGS</a>
+            <a href=''>HELP</a>
+            <a href="{% url 'passenger_login' %}">LOG OUT</a>
+        </div>
+    </div>
+    <div style="background-color: #4B39EF; top: auto;" class="nav" id="menu-icon">
+        <div class="left-side">
+            <div class="menu-icn" >
+                <span style="font-size:25px;cursor:pointer; z-index:100; position:fixed;color: white;" onclick="openNav()">&#9776;</span>
+            </div>
+        </div>
+        <div style="color: white;" class="right-side">
+            <span><strong> {{name}}</strong></span>
+            <img alt="" class="img-icon" src="{% static 'images/passenger.png' %}"  >
+        </div>
+    </div>
+    <script>
+        function openNav() { 
+            document.getElementById("overlay-nav").style.display = "block";
+            document.getElementById("menu-icon").style.display="none";  }
+        function closeNav() {
+            document.getElementById("overlay-nav").style.display = "none";
+            document.getElementById("menu-icon").style.display="block"; }
+    </script>
+{% endblock content %}
+
