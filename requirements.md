@@ -1,3 +1,4 @@
-- Django
-- virtual env (Optional)
-- Mysql
+Django
+mathfilters
+virtualenv
+Mysql
